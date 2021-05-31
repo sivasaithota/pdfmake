@@ -2,9 +2,6 @@ var PdfPrinter = require('pdfmake/src/printer');
 const path = require('path');
 const ValuesTable = require('./values');
 const config = require('config');
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-const download = require('download-pdf')
 var fonts = {
   Roboto: {
     normal: path.resolve(__dirname,'../Roboto/Roboto-Regular.ttf'),
@@ -27,12 +24,11 @@ class main {
         fontSize: 10,
       }
     };
-    this.tables = new Tables();
-   
   }
 
   async createPDF(inputs) {
     try {
+      this.tables = new Tables();
       console.log('start');
       console.log(inputs.body);
       const values = inputs.body;
@@ -61,47 +57,27 @@ class main {
       var pdfDoc = printer.createPdfKitDocument(parse);
       pdfDoc.pipe(fs.createWriteStream('./download/images.pdf'));
       pdfDoc.end();
-      var pdf = "http://localhost:5000/download/images.pdf"
-
-      download(pdf, {}, function (err) {
-        if (err) throw err
-        console.log("download successfull")
-      })
-      const filePath = `${__dirname}images.pdf`;
-      await this.resetValues();
-      return filePath;
+      //await this.resetValues(this.tables);
+      return {status:'OK'};
     } catch (error) {
       console.log(error)
     }
   }
-  async resetValues(){
-    this.values = new ValuesTable();
+  async resetValues(tables){
     this.pdf = {
       content: [],
       defaultStyle: {
         fontSize: 10,
       }
     };
+    
     this.values.firstTotal=0;
     this.values.secondTotal=0;
     this.values.firstRow = [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.values.secondRow = [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     console.log(this.values.firstTotal);
   }
-  async compressToArchive(archivePath, ...filePaths) {
-    try {
-      for (let i = 0; i < filePaths.length; i += 1) {
-        console.log(filePaths[i]);
-        const cmd = `pushd ${path.dirname(filePaths[i])} && zip -urm ${archivePath} "./${path.basename(filePaths[i])}" && popd`;
-        await exec(cmd, {
-          shell: '/bin/bash'
-        });
-      }
-    } catch (err) {
-      console.log('Error compressing files', err); // eslint-disable-line no-console
-      throw err;
-    }
-  }
+
 }
 
 module.exports = main;
