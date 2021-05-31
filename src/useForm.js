@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
 const axios = require('axios');
 const express = require('express');
 const app = express();
+
 app.use(express.json());
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({
@@ -38,6 +40,7 @@ const useForm = (callback, validate) => {
     }).catch(error =>{
       console.log(error);
     })
+    return <Redirect to="/download/images.pdf"/>
   };
 
   useEffect(
@@ -46,7 +49,6 @@ const useForm = (callback, validate) => {
         callback();
       }
     },
-    [errors]
   );
 
   return { handleChange, handleSubmit, values, errors };

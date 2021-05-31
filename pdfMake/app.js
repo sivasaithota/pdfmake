@@ -23,10 +23,11 @@ app.use('/users', usersRouter);
 
 const main = new Main();
 
-app.use('/getPDF',function(req,res,next){
-   main.createPDF(req).then((res) => {
-    return res.download();
-  });
+app.use('/getPDF',async function(req,res,next){
+   await main.createPDF(req).then((res) => {
+     return {result:'ok'}
+      });
+
 })
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

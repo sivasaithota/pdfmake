@@ -370,7 +370,7 @@ class Tables {
     }
     let dict = {
    table: {
-        widths: [20, 25,  25, 25, 20, 20, 25, 20, 25, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+        widths: [20, 25,  25, 25, 20, 20, 25, 20, 25, 20, 25, 20, 20, 20, 20, 20, 20, 15],
       alignment: 'center',
      body: [arr]
    },layout :{hLineColor:'gray',vLineColor:'gray'}
