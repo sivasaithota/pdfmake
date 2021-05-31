@@ -32,7 +32,7 @@ const FormSignup = ({ submitForm }) => {
           <label className='form-label'>Batcher Name</label>
           <input
             className='form-input'
-            type='email'
+            type='text'
             name='batcherName'
             value={values.batcherName}
             onChange={handleChange}
@@ -129,6 +129,17 @@ const FormSignup = ({ submitForm }) => {
             type='text'
             name='orderQty'
             value={values.orderQty}
+            onChange={handleChange}
+          />
+          {errors.email && <p>{errors.email}</p>}
+        </div>
+        <div className='form-inputs'>
+          <label className='form-label'>Batch Number</label>
+          <input
+            className='form-input'
+            type='text'
+            name='batchNumber'
+            value={values.batchNumber}
             onChange={handleChange}
           />
           {errors.email && <p>{errors.email}</p>}

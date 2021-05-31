@@ -14,7 +14,7 @@ class Tables {
         headerRows: 2,
         body: [
           [{
-            image: path.resolve('/Users/sivasaithota/Downloads/pdfmake/Picture 1.png'),
+            image: path.resolve(__dirname,'../Picture 1.png'),
             width: 50,
             height: 40,
             rowSpan: 2,

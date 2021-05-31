@@ -1,5 +1,6 @@
 var PdfPrinter = require('pdfmake/src/printer');
 const path = require('path');
+const ValuesTable = require('./values');
 const config = require('config');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
@@ -27,6 +28,7 @@ class main {
       }
     };
     this.tables = new Tables();
+   
   }
 
   async createPDF(inputs) {
@@ -66,10 +68,25 @@ class main {
         console.log("download successfull")
       })
       const filePath = `${__dirname}images.pdf`;
+      await this.resetValues();
       return filePath;
     } catch (error) {
       console.log(error)
     }
+  }
+  async resetValues(){
+    this.values = new ValuesTable();
+    this.pdf = {
+      content: [],
+      defaultStyle: {
+        fontSize: 10,
+      }
+    };
+    this.values.firstTotal=0;
+    this.values.secondTotal=0;
+    this.values.firstRow = [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    this.values.secondRow = [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    console.log(this.values.firstTotal);
   }
   async compressToArchive(archivePath, ...filePaths) {
     try {

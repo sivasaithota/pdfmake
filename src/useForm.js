@@ -5,6 +5,7 @@ const useForm = (callback, validate) => {
   const [values, setValues] = useState({
     batchDate: '',
     batcherName: '',
+    batchNumber: '',
     orderNumber: '',
     customer: '',
     batchStartTime: '',
@@ -36,7 +37,7 @@ const useForm = (callback, validate) => {
     }).catch(error =>{
       console.log(error);
     })
-    return <Redirect to="/download/images.pdf"/>
+    return <Redirect to="/images.pdf"/>
   };
 
   useEffect(
