@@ -10,9 +10,16 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "config": "^3.3.6",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "download-pdf": "^0.1.6",
     "express": "^4.17.1",
+    "generator": "^1.0.1",
+    "jade": "^1.11.0",
     "material-ui": "^0.20.2",
+    "morgan": "^1.10.0",
     "pdfmake": "^0.1.71",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -22,11 +29,12 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node pdfMake/bin/WWW",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://locahost:5000/",
   "eslintConfig": {
     "extends": [
       "react-app",

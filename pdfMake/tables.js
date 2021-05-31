@@ -54,7 +54,7 @@ class Tables {
     return dict;
   }
 
-  async requirements() {
+  async requirements(values) {
     let dict = {
       table: {
         heights: 10,
@@ -67,13 +67,13 @@ class Tables {
             text: 'Batch Date',
             bold: true
           }, {
-            text: ": 29/03/2020",
+            text: `: ${values.batchDate}`,
             colSpan: 1
           }, {
             text: 'Batch Start Time',
             bold: true
           }, {
-            text: ": 09.09.23",
+            text: `: ${values.batchStartTime}`,
             colSpan: 1
           }, {
             text: 'Batch End Time',
@@ -86,51 +86,51 @@ class Tables {
             text: 'Batch Number',
             bold: true
           }, {
-            text: ": 721.0",
+            text: `: ${values.batchNumber}`,
             colSpan: 1
           }, {
             text: 'Recipe Code',
             bold: true
           }, {
-            text: ": M35 PILE",
+            text: `: ${values.recipeCode}`,
             colSpan: 1
           }, {
             text: 'Ordered Qty',
             bold: true
           }, {
-            text: ": 6.00",
+            text: `: ${values.orderQty}`,
             colSpan: 1
           }],
           [{
             text: 'Batcher Name',
             bold: true
           }, {
-            text: ": PremixT",
+            text: `: ${values.batcherName}`,
             colSpan: 1
           }, {
             text: 'Recipe Name',
             bold: true
           }, {
-            text: ": M35 PILE",
+            text: `: ${values.recipeCode}`,
             colSpan: 1
           }, {
             text: 'Production Qty',
             bold: true
           }, {
-            text: ": 4.00",
+            text: `: ${values.productionQty}`,
             colSpan: 1
           }],
           [{
             text: 'Order Name',
             bold: true
           }, {
-            text: ": M35 PILE",
+            text: `: ${values.recipeCode}`,
             colSpan: 1
           }, {
-            text: 'Truck Numbere',
+            text: 'Truck Number',
             bold: true
           }, {
-            text: ": TN12 R 8636",
+            text: `: ${values.truckNumber}`,
             colSpan: 1
           }, {
             text: 'Adj/Manual Qty',
@@ -143,26 +143,26 @@ class Tables {
             text: 'Customer Name',
             bold: true
           }, {
-            text: ": ECPL Taramani",
+            text: `: ${values.customer}`,
             colSpan: 1
           }, {
             text: 'Truck Driver',
             bold: true
           }, {
-            text: ": 090923",
+            text: `: ${values.truckDriver}`,
             colSpan: 1
           }, {
             text: 'With This Load',
             bold: true
           }, {
-            text: ": 6.00",
+            text: `: ${values.withLoad}`,
             colSpan: 1
           }],
           [{
             text: 'Site',
             bold: true
           }, {
-            text: ": PILE-B199",
+            text: `: ${values.site}`,
             colSpan: 1
           }, {
             text: 'Batch Size',
@@ -268,8 +268,8 @@ class Tables {
     return dict;
   }
 
-  async addMassRecipe() {
-    const total = await this.value.getMassRecipeTotal();
+  async addMassRecipe(productionQty, values) {
+    const total = await this.value.getMassRecipeTotal(productionQty, values);
     const dict = {
       'table': {
         widths: [460, 64],
@@ -296,6 +296,9 @@ class Tables {
 
   async productionTable(values) {
     let dict ={}
+    //const randomValues1 = 
+    //const randomValues2 = 
+    //console.log("first",randomValues1,"second",randomValues2, "constant",constants.mainTableComponents1);
     try {
        dict = {
         table: {
@@ -315,6 +318,7 @@ class Tables {
     } catch (error) {
       console.log(error);
     }
+    
     return dict;
   }
 
@@ -360,7 +364,6 @@ class Tables {
     for(let index=0; index<this.value.firstRow.length;index++){
       const first = parseFloat(this.value.firstRow[index]);
       const second = parseFloat(this.value.secondRow[index])
-      console.log(first - second,(first - second)/second)
       if(first!==0)
       arr[index] = (((first - second)/second)*100).toFixed(2).toString()
       else arr[index]=0;

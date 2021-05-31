@@ -1,6 +1,9 @@
 var PdfPrinter = require('pdfmake/src/printer');
 const path = require('path');
 const config = require('config');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+const download = require('download-pdf')
 var fonts = {
 	Roboto: {
 		normal:  path.resolve('../Roboto/Roboto-Regular.ttf'),
@@ -13,7 +16,7 @@ var fonts = {
 var printer = new PdfPrinter(fonts);
 var fs = require('fs');
 const Tables = require('./tables');
-const constants = require('../constants');
+
 class main{
   
   constructor(){
@@ -24,17 +27,24 @@ class main{
 
    async createPDF(inputs){
      try {
-       
+       console.log('start');
+      console.log(inputs.body);
+      const values = inputs.body;
+      const recipeCode = `${values.customer}.recipe_code.${values.recipeCode}`
+      const productionQ = parseInt(values.productionQty);
+      const recipe = config.get(recipeCode)
+      console.log(recipe);
       this.pdf.content.push(await this.tables.addTitleHeader().then(console.log('added title header')));
       this.pdf.content.push (await this.tables.addMargin().then(console.log('added margin header')));
-      this.pdf.content[1].table.body[0][0].stack.push(await this.tables.requirements().then(console.log('requirements')));
+      this.pdf.content[1].table.body[0][0].stack.push(await this.tables.requirements(values).then(console.log('requirements')));
       this.pdf.content[1].table.body[0][0].stack.push(await this.tables.tableSubHeaders().then(console.log('added sub header')));
-      this.pdf.content[1].table.body[0][0].stack.push(await this.tables.mainTable(constants.mainTableComponents).then(console.log('added main table')));
-      this.pdf.content[1].table.body[0][0].stack.push(await this.tables.addMassRecipe());
-      const values = config.get('ECPL_THARAMANI.recipe_code.M35_Pile');
-    
-      for(let index =0;index<6; index++){
-        await this.pdf.content[1].table.body[0][0].stack.push(await this.tables.productionTable(values));
+      this.pdf.content[1].table.body[0][0].stack.push(await this.tables.mainTable(recipe).then(console.log('added main table')));
+      this.pdf.content[1].table.body[0][0].stack.push(await this.tables.addMassRecipe(productionQ, recipe));
+      console.log(recipe);
+      const recipeValues = config.get(`${values.customer}.recipe_code.${values.recipeCode}`);
+      console.log(recipeValues);
+      for(let index =0;index<productionQ; index++){
+        await this.pdf.content[1].table.body[0][0].stack.push(await this.tables.productionTable(recipeValues));
       }
       this.pdf.content[1].table.body[0][0].stack.push(await this.tables.totalWeightHeader('Set'));
       this.pdf.content[1].table.body[0][0].stack.push(await this.tables.totalWeightTable(1));
@@ -44,19 +54,37 @@ class main{
       this.pdf.content[1].table.body[0][0].stack.push(await this.tables.totalWeightFooter(2));
       this.pdf.content[1].table.body[0][0].stack.push(await this.tables.diffInPercentageHeader())
       this.pdf.content[1].table.body[0][0].stack.push(await this.tables.diffInPercenntage())
-      var pdfDoc = printer.createPdfKitDocument(this.pdf);
-      pdfDoc.pipe(fs.createWriteStream('./images.pdf'));
+      console.log(JSON.stringify(this.pdf))
+const parse = JSON.parse(JSON.stringify(this.pdf))
+      console.log(this.pdf.content[1].table.body[0][0].stack)
+      var pdfDoc = printer.createPdfKitDocument(parse);
+      pdfDoc.pipe(fs.createWriteStream('./download/images.pdf'));
       pdfDoc.end();
+      var pdf = "http://localhost:5000/download/images.pdf"
+
+download(pdf, {}, function(err){
+    if (err) throw err
+    console.log("meow")
+}) 
+      const filePath = `${__dirname}images.pdf`;
+      return filePath;
      } catch (error) {
        console.log(error)
      }
-    
-
+  }
+  async compressToArchive(archivePath, ...filePaths) {
+    try {
+      for (let i = 0; i < filePaths.length; i += 1) {
+        console.log(filePaths[i]);
+        const cmd = `pushd ${path.dirname(filePaths[i])} && zip -urm ${archivePath} "./${path.basename(filePaths[i])}" && popd`;
+        await exec(cmd, { shell: '/bin/bash' });
+      }
+    } catch (err) {
+      console.log('Error compressing files', err);// eslint-disable-line no-console
+      throw err;
+    }
   }
 }
-/* const total = new main()
-Promise.resolve( total.createPDF().then(data => {
-  console.log(data,  'end');
-})); */
+
 module.exports = main;
 

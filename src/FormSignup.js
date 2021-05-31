@@ -57,7 +57,7 @@ const FormSignup = ({ submitForm }) => {
             type='text'
             name='customer'
             value={values.customer}
-            onChange={handleChange}
+            onChange={ handleChange}
           />
           {errors.password2 && <p>{errors.password2}</p>}
     

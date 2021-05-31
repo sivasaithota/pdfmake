@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-
+const axios = require('axios');
+const express = require('express');
+const app = express();
+app.use(express.json());
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({
     batchDate: '',
@@ -28,9 +31,13 @@ const useForm = (callback, validate) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
     setErrors(validate(values));
     setIsSubmitting(true);
+    axios.post('/getPDF',values).then(response => {
+      console.log(response);
+    }).catch(error =>{
+      console.log(error);
+    })
   };
 
   useEffect(

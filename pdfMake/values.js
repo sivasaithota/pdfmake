@@ -1,4 +1,3 @@
-const constants = require('../constants')
 class Values {
 
   constructor(){
@@ -7,10 +6,10 @@ class Values {
     this.firstRow = [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     this.secondRow = [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   }
-  async getMassRecipeTotal(){
+  async getMassRecipeTotal(quantity, values){
     let total =0.0;
-    for(let index=0; index<constants.mainTableComponents.length; index++){
-        total += parseFloat(constants.mainTableComponents[index]);
+    for(let index=0; index<quantity; index++){
+        total += parseFloat(values[index]);
     }
    
     return total;
