@@ -10,12 +10,6 @@ const FormSignup = ({ submitForm }) => {
   );
 
  
-    
-    
-    
-    
-    
-
   return (
     <div className='form-content-right'>
       <form onSubmit={handleSubmit} className='form' noValidate>
@@ -28,19 +22,19 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='date'
-            name='username'
-            value={values.username}
+            name='batchDate'
+            value={values.batchDate}
             onChange={handleChange}
           />
           {errors.username && <p>{errors.username}</p>}
         </div>
         <div className='form-inputs'>
-          <label className='form-label'>Batcher Name,</label>
+          <label className='form-label'>Batcher Name</label>
           <input
             className='form-input'
             type='email'
-            name='email'
-            value={values.email}
+            name='batcherName'
+            value={values.batcherName}
             onChange={handleChange}
           />
           {errors.email && <p>{errors.email}</p>}
@@ -50,8 +44,8 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='text'
-            name='password'
-            value={values.password}
+            name='orderNumber'
+            value={values.orderNumber}
             onChange={handleChange}
           />
           {errors.password && <p>{errors.password}</p>}
@@ -61,8 +55,8 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='text'
-            name='password2'
-            value={values.password2}
+            name='customer'
+            value={values.customer}
             onChange={handleChange}
           />
           {errors.password2 && <p>{errors.password2}</p>}
@@ -75,8 +69,8 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='text'
-            name='username'
-            value={values.username}
+            name='batchStartTime'
+            value={values.batchStartTime}
             onChange={handleChange}
           />
           {errors.username && <p>{errors.username}</p>}
@@ -86,8 +80,8 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='select'
-            name='email'
-            value={values.email}
+            name='recipeCode'
+            value={values.recipeCode}
             onChange={handleChange}
           />
           {errors.email && <p>{errors.email}</p>}
@@ -97,8 +91,8 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='text'
-            name='password'
-            value={values.password}
+            name='site'
+            value={values.site}
             onChange={handleChange}
           />
           {errors.password && <p>{errors.password}</p>}
@@ -108,8 +102,8 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='text'
-            name='password2'
-            value={values.password2}
+            name='truckNumber'
+            value={values.truckNumber}
             onChange={handleChange}
           />
           {errors.password2 && <p>{errors.password2}</p>}
@@ -122,8 +116,8 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='text'
-            name='username'
-            value={values.username}
+            name='truckDriver'
+            value={values.truckDriver}
             onChange={handleChange}
           />
           {errors.username && <p>{errors.username}</p>}
@@ -132,9 +126,9 @@ const FormSignup = ({ submitForm }) => {
           <label className='form-label'>Ordered Qty</label>
           <input
             className='form-input'
-            type='email'
-            name='email'
-            value={values.email}
+            type='text'
+            name='orderQty'
+            value={values.orderQty}
             onChange={handleChange}
           />
           {errors.email && <p>{errors.email}</p>}
@@ -144,24 +138,13 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='text'
-            name='password'
-            value={values.password}
+            name='productionQty'
+            value={values.productionQty}
             onChange={handleChange}
           />
           {errors.password && <p>{errors.password}</p>}
         </div>
-        <div className='form-inputs'>
-          <label className='form-label'> Manual Qty</label>
-          <input
-            className='form-input'
-            type='text'
-            name='password2'
-            value={values.password2}
-            onChange={handleChange}
-          />
-          {errors.password2 && <p>{errors.password2}</p>}
-    
-        </div>
+      
         </div>
         <div style={{ display: "flex" }}>
         <div className='form-inputs'>
@@ -169,8 +152,8 @@ const FormSignup = ({ submitForm }) => {
           <input
             className='form-input'
             type='text'
-            name='username'
-            value={values.username}
+            name='withLoad'
+            value={values.withLoad}
             onChange={handleChange}
           />
           {errors.username && <p>{errors.username}</p>}
