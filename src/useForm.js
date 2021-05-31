@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 const axios = require('axios');
-const express = require('express');
-const app = express();
-
-app.use(express.json());
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({
     batchDate: '',
