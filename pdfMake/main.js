@@ -7,10 +7,10 @@ const exec = util.promisify(require('child_process').exec);
 const download = require('download-pdf')
 var fonts = {
   Roboto: {
-    normal: path.resolve('../Roboto/Roboto-Regular.ttf'),
-    bold: path.resolve('../Roboto/Roboto-Medium.ttf'),
-    italics: path.resolve('../Roboto/Roboto-Italic.ttf'),
-    bolditalics: path.resolve('../Roboto/Roboto-MediumItalic.ttf')
+    normal: path.resolve(__dirname,'../Roboto/Roboto-Regular.ttf'),
+    bold: path.resolve(__dirname,'../Roboto/Roboto-Medium.ttf'),
+    italics: path.resolve(__dirname,'../Roboto/Roboto-Italic.ttf'),
+    bolditalics: path.resolve(__dirname,'../Roboto/Roboto-MediumItalic.ttf')
   }
 };
 
