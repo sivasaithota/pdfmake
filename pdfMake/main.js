@@ -1,6 +1,5 @@
 var PdfPrinter = require('pdfmake/src/printer');
 const path = require('path');
-const ValuesTable = require('./values');
 const config = require('config');
 var fonts = {
   Roboto: {
@@ -19,9 +18,10 @@ class main {
 
   constructor() {
     this.pdf = {
+      pageMargins: [ 10, 30, 40, 60 ],
       content: [],
       defaultStyle: {
-        fontSize: 10,
+        fontSize: 8.5,
       }
     };
   }
@@ -40,7 +40,8 @@ class main {
       this.pdf.content[1].table.body[0][0].stack.push(await this.tables.requirements(values).then(console.log('requirements')));
       this.pdf.content[1].table.body[0][0].stack.push(await this.tables.tableSubHeaders().then(console.log('added sub header')));
       this.pdf.content[1].table.body[0][0].stack.push(await this.tables.mainTable(recipe).then(console.log('added main table')));
-      this.pdf.content[1].table.body[0][0].stack.push(await this.tables.addMassRecipe(productionQ, recipe));
+      this.pdf.content[1].table.body[0][0].stack.push(await this.tables.addMassRecipe(recipe));
+      this.pdf.content[1].table.body[0][0].stack.push(await this.tables.targetValueHeader());
       const recipeValues = config.get(`${values.customer}.recipe_code.${values.recipeCode}`);
       for (let index = 0; index < productionQ; index++) {
         await this.pdf.content[1].table.body[0][0].stack.push(await this.tables.productionTable(recipeValues));
@@ -57,25 +58,19 @@ class main {
       var pdfDoc = printer.createPdfKitDocument(parse);
       pdfDoc.pipe(fs.createWriteStream('./download/images.pdf'));
       pdfDoc.end();
-      //await this.resetValues(this.tables);
+      await this.resetValues();
       return {status:'OK'};
     } catch (error) {
       console.log(error)
     }
   }
-  async resetValues(tables){
+  async resetValues(){
     this.pdf = {
       content: [],
       defaultStyle: {
         fontSize: 10,
       }
     };
-    
-    this.values.firstTotal=0;
-    this.values.secondTotal=0;
-    this.values.firstRow = [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    this.values.secondRow = [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    console.log(this.values.firstTotal);
   }
 
 }

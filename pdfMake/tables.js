@@ -10,7 +10,7 @@ class Tables {
       style: 'tableExample',
       color: '#444',
       'table': {
-        widths: [50, 100, 100, 100, 100],
+        widths: [60, 80, 100, 100, 100],
         headerRows: 2,
         body: [
           [{
@@ -18,32 +18,38 @@ class Tables {
             width: 50,
             height: 40,
             rowSpan: 2,
+            alignment: 'center',
             border: [false, false, false, false]
-          }, {
+          },{text:'', border: [false, false, false, false]}, {
             text: 'M/S PREMIX CONCRETE SOLUTIONS',
             style: 'tableHeader',
-            colSpan: 4,
+            colSpan: 3,
             alignment: 'center',
             bold: true,
             border: [true, true, true, true],
             fontSize: 16,
-          }, {}, {}, {}],
+          },{},{text:'', border: [false, false, false, false]}],
           [{}, {
-            text: 'Report Title',
+            text: 'Report Title:',
             bold: true,
+            fontSize: 14,
+            alignment: 'left',
             border: [false, false, false, false]
           }, {
             text: 'Batch Sheet',
             bold: true,
-            alignment: 'left',
+            fontSize: 14,
+            alignment: 'right',
             border: [false, false, false, false]
           }, {
-            text: 'Plant Sl.No',
+            text: 'Plant Sl.No:',
             bold: true,
+            fontSize: 14,
             alignment: 'right',
             border: [false, false, false, false]
           }, {
             text: '420',
+            fontSize: 14,
             bold: true,
             alignment: 'left',
             border: [false, false, false, false]
@@ -65,116 +71,152 @@ class Tables {
         body: [
           [{
             text: 'Batch Date',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.batchDate}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Batch Start Time',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.batchStartTime}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Batch End Time',
+            fontSize: 10,
             bold: true
           }, {
             text: ":09:09:23",
+            fontSize: 10,
             colSpan: 1
           }],
           [{
             text: 'Batch Number',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.batchNumber}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Recipe Code',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.recipeCode}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Ordered Qty',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.orderQty}`,
+            fontSize: 10,
             colSpan: 1
           }],
           [{
             text: 'Batcher Name',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.batcherName}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Recipe Name',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.recipeCode}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Production Qty',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.productionQty}`,
+            fontSize: 10,
             colSpan: 1
           }],
           [{
             text: 'Order Name',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.recipeCode}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Truck Number',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.truckNumber}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Adj/Manual Qty',
+            fontSize: 10,
             bold: true
           }, {
             text: ": 0.00",
+            fontSize: 10,
             colSpan: 1
           }],
           [{
             text: 'Customer Name',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.customer}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Truck Driver',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.truckDriver}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'With This Load',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.withLoad}`,
+            fontSize: 10,
             colSpan: 1
           }],
           [{
             text: 'Site',
+            fontSize: 10,
             bold: true
           }, {
             text: `: ${values.site}`,
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Batch Size',
+            fontSize: 10,
             bold: true
           }, {
             text: ": 1.00",
+            fontSize: 10,
             colSpan: 1
           }, {
             text: 'Mixer Capacity',
+            fontSize: 10,
             bold: true
           }, {
             text: ":1.00",
+            fontSize: 10,
             colSpan: 1
           }],
         ]
@@ -217,22 +259,22 @@ class Tables {
   async tableSubHeaders() {
     let dict = {
       'table': {
-        widths: [120, 140, 100, 80, 80, ],
+        widths: [120, 140, 100, 80, 83 ],
         body: [
           [{
               text: 'Aggregate',
               bold: true,
-              alignment: 'center'
+              alignment: 'right'
             },
             {
               text: 'Cement',
               bold: true,
-              alignment: 'center'
+              alignment: 'right'
             },
             {
               text: 'Water/Ice',
               bold: true,
-              alignment: 'center'
+              alignment: 'right'
             },
             {
               text: 'Admixture',
@@ -242,7 +284,7 @@ class Tables {
             {
               text: 'Silica',
               bold: true,
-              alignment: 'center'
+              alignment: 'right'
             }
           ],
         ]
@@ -253,10 +295,11 @@ class Tables {
   }
   async mainTable(values) {
     let dict = {
+      'alignment':'center',
       'table': {
-        widths: [20, 20, 30, 30, 20, 20, 20, 15, 20, 20, 20, 20, 20, 20, 20, 20, 20, 25],
+        widths: [20, 20, 30, 30, 20, 20, 20, 15, 20, 15, 15,20, 20, 20, 20, 20, 20, 20, 22],
         body: [
-          ['MS', 'MS', '20MM', '12MM', 'Ag5', 'Ag6', 'C1', 'C2', 'C3', 'C4', 'W1', 'W2', 'W3', 'Ad1', 'Ad2', 'Ad3', 'Ad4', 'Silica'],
+          ['MS', 'MS', '20MM', '12MM', 'Ag5', 'Ag6', 'C1', 'C2', 'C3', 'C4', 'C5', 'W1', 'W2', 'W3', 'Ad1', 'Ad2', 'Ad3', 'Ad4', 'Silica'],
           values,
         ]
       },
@@ -268,11 +311,11 @@ class Tables {
     return dict;
   }
 
-  async addMassRecipe(productionQty, values) {
-    const total = await this.value.getMassRecipeTotal(productionQty, values);
+  async addMassRecipe( values) {
+    const total = await this.value.getMassRecipeTotal( values);
     const dict = {
       'table': {
-        widths: [460, 64],
+        widths: [475, 64],
         body: [
           [{
             text: 'Mass of Recipe Targets in Kgs.',
@@ -296,18 +339,16 @@ class Tables {
 
   async productionTable(values) {
     let dict ={}
-    //const randomValues1 = 
-    //const randomValues2 = 
-    //console.log("first",randomValues1,"second",randomValues2, "constant",constants.mainTableComponents1);
     try {
        dict = {
+        'alignment':'center',
         table: {
-          widths: [20, 20, 30, 30, 20, 20, 20, 15, 20, 20, 20, 20, 20, 20, 20, 20, 20, 25],
+          widths: [20, 20, 30, 30, 20, 20, 20, 15, 20, 15, 15,20, 20, 20, 20, 20, 20, 20, 22],
           body: [
             await this.value.randomValues(values,1),
             await this.value.randomValues(values,2),
-            ['0.00', '0.00', '0.00','0.00','0.00','0.00','0','0','0','0','0','0','','0.00','0.00','0.00','0.00','0'],
-            ['0.00', '0.00', '0.00','0.00','0.00','0.00','','','','','','','','','','','',''],
+            ['0.00', '0.00', '0.00','0.00','0.00','0.00','0','0','0','0','0','0','0','','0.00','0.00','0.00','0.00','0'],
+            ['0.00', '0.00', '0.00','0.00','0.00','0.00','','','','','','','','','','','','',''],
           ]
         },
         layout: {
@@ -322,9 +363,9 @@ class Tables {
     return dict;
   }
 
-  async targetValue() {
+  async targetValueHeader() {
     const dict = {
-      text: 'Target and Actual Value with moisture correction/absorption in % and other Corrections in Kgs..',
+      text: 'Target and Actual Value with moisture correction/absorption in % and other Corrections in Kgs.',
       bold: true
     }
     return dict;
@@ -332,7 +373,7 @@ class Tables {
 
  async totalWeightHeader(name) {
     let dict = {
-      text: `Total ${name} Weight in Kgs..`,
+      text: `Total ${name} Weight in Kgs.`,
       bold: true
     }
     return dict;
@@ -344,7 +385,7 @@ class Tables {
   }else totalArray = await this.value.secondRow;
     let dict = {
       'table': {
-        widths: [20, 25,  25, 25, 20, 20, 25, 20, 25, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+        widths: [20, 25,  25, 25, 20, 20, 25, 20, 25, 15, 15,20, 20, 20, 20, 20, 20, 20, 13],
         alignment: 'center',
         body: [totalArray]
       },
@@ -370,7 +411,7 @@ class Tables {
     }
     let dict = {
    table: {
-        widths: [20, 25,  25, 25, 20, 20, 25, 20, 25, 20, 25, 20, 20, 20, 20, 20, 20, 15],
+        widths: [20, 25,  25, 25, 20, 20, 25, 20, 25, 15,15, 25, 20, 20, 20, 20, 20, 20, 10],
       alignment: 'center',
      body: [arr]
    },layout :{hLineColor:'gray',vLineColor:'gray'}
@@ -380,11 +421,11 @@ class Tables {
   
   async totalWeightFooter(index) {
     let total ;
-    if(index===1) total = this.value.firstTotal;
-    else total = this.value.secondTotal;
+    if(index===1) total = parseFloat( this.value.firstTotal).toFixed(2).toString();
+    else total = parseFloat(this.value.secondTotal).toFixed(2).toString();
     let dict = {
       'table': {
-        widths: [460, 66],
+        widths: [475, 66],
         body: [
           [{
             text: 'Mass of Total Set Weight in Kgs.',
